@@ -12,7 +12,7 @@
             <label for="nickname">Name : </label>
             <input id="nickname" type="text" v-model = "nickname">
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">회원 가입</button>
     </form>
 </template>
 
@@ -22,13 +22,17 @@
     export default {
         data(){
             return {
+                //form values
                 username : '',
                 password : '',
-                nickname : ''
+                nickname : '',
+
+                //log
+                logMessage :''
             }
         },
         methods : {
-            submitForm() {
+            async submitForm() {
                 const userData = {
                     username : this.username,
                     password : this.password,
@@ -37,6 +41,14 @@
 
                 console.log('form 제출')
                 registerUser(userData);
+                this.logMessage = '${data.username} 님이 가입되셨습니다' ; 
+                this.initForm();
+            },
+
+            initForm() {
+                this.username = '';
+                this.password = '';
+                this.nickname = '';
             }
         }
     }
